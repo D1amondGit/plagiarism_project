@@ -1,0 +1,46 @@
+name: Plagiarism Checker Pipeline
+
+# Запускать, если что-то пушим (особенно в папку uploads или код)
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'uploads/**'
+      - 'tests/**'
+      - 'requirements.txt'
+
+jobs:
+  analyze-and-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Скачиваем код репозитория
+    - uses: actions/checkout@v3
+    
+    # 2. Ставим Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    # 3. Ставим библиотеки
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    # 4. Прогоняем тесты (Критерий "Работоспособность")
+    - name: Run Unit Tests
+      run: pytest tests/
+      
+    # 5. Запускаем сам Антиплагиат (Критерий "Полезность")
+    - name: Run Plagiarism Detector
+      run: python src/main.py
+      
+    # 6. Сохраняем результаты (Артефакты)
+    # Преподаватель сможет скачать график прямо из Actions
+    - name: Upload Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: Plagiarism-Report
+        path: reports/

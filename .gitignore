@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+.vscode/
+.idea/
+# Игнорируем загруженные файлы и отчеты (чтобы не мусорить в репозитории)
+uploads/*
+!uploads/.keep
+reports/*
+!reports/.keep
