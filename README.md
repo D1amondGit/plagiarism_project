@@ -1,4 +1,8 @@
-# 🕵️‍♂️ Educational Plagiarism Detector  
+
+# 🕵️‍♂️ Educational Plagiarism Detector 
+
+![CI/CD Status](https://github.com/D1amondGit/plagiarism_project/actions/workflows/check.yml/badge.svg)
+
 **Интеллектуальная система поиска заимствований в учебных работах**
 
 Этот проект разработан в рамках финального задания курса.  
